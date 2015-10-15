@@ -7,8 +7,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.meiriq0717.mydemo.adapter.RecyclerAdapter;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
+    private RecyclerAdapter adapter;
+    private List<Map<String, String>> list = new ArrayList<Map<String, String>>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +30,20 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recview);
         LinearLayoutManager manager = new LinearLayoutManager(MainActivity.this);
         recyclerView.setLayoutManager(manager);
+        adapter = new RecyclerAdapter(MainActivity.this);
+        initData();
+        adapter.setmList(list);
+        recyclerView.setAdapter(adapter);
+
+    }
+
+    private void initData() {
+        for (int i = 0; i < Images.imageUrls.length; i++) {
+            Map<String, String> map = new HashMap<String, String>();
+            map.put("title", "imageTitle" + i);
+            map.put("imageUrl", Images.imageUrls[i]);
+            list.add(map);
+        }
     }
 
     @Override
