@@ -4,6 +4,10 @@ import android.app.Application;
 import android.graphics.Color;
 import android.os.Environment;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import in.srain.cube.Cube;
 import in.srain.cube.image.ImageLoaderFactory;
 import in.srain.cube.image.impl.DefaultImageLoadHandler;
@@ -14,6 +18,15 @@ import in.srain.cube.util.LocalDisplay;
  */
 public class MyApplication extends Application {
     MyApplication instance;
+    private static List<Map<String, String>> mList = new ArrayList<Map<String, String>>();
+
+    public  List<Map<String, String>> getmList() {
+        return mList;
+    }
+
+    public void setmList(List<Map<String, String>> list) {
+        mList = list;
+    }
 
     @Override
     public void onCreate() {

@@ -1,11 +1,14 @@
 package com.example.meiriq0717.mydemo;
 
+import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.meiriq0717.mydemo.adapter.RecyclerAdapter;
 
@@ -14,10 +17,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private RecyclerView recyclerView;
     private RecyclerAdapter adapter;
     private List<Map<String, String>> list = new ArrayList<Map<String, String>>();
+    private FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +38,9 @@ public class MainActivity extends AppCompatActivity {
         initData();
         adapter.setmList(list);
         recyclerView.setAdapter(adapter);
-
+        new MyApplication().setmList(list);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(this);
     }
 
     private void initData() {
@@ -66,5 +72,15 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.fab:
+                Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 }
